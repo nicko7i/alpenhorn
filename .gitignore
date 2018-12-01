@@ -1,0 +1,10 @@
+#
+#  Local reference files
+yocto-tutorial
+#
+#  Intellij metadata
+.idea
+#
+#  Blacklist the build directory, exeept for build/source-me-first.sh
+build
+!build/source-me-first.sh

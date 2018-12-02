@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+docker run -it -h alpenhorn -v $(pwd)/build:/build alpenhorn /bin/bash

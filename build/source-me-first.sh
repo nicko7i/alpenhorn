@@ -7,6 +7,7 @@ BSP=${ALPENHORN_BSP_URL:-http://github.com/boundarydevices/boundary-bsp-platform
 BSP_BRANCH=${ALPENHORN_BSP_BRANCH:-pyro}
 
 alias setup="source setup-environment ${TARGET}"
+export LC_CTYPE="en_US.UTF-8"
 
 function repo_init {
   #

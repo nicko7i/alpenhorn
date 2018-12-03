@@ -2,11 +2,11 @@
 
 export MACHINE=${ALPENHORN_MACHINE:-imx6sllevk}
 export DISTRO=${ALPENHORN_DISTRO:-fslc-framebuffer}
-VARIANT=${ALPENHORN_VARIANT:-core-image-minimal}
+TARGET=${ALPENHORN_TARGET:-core-image-minimal}
 BSP=${ALPENHORN_BSP_URL:-http://github.com/boundarydevices/boundary-bsp-platform}
 BSP_BRANCH=${ALPENHORN_BSP_BRANCH:-pyro}
 
-alias setup="source setup-environment ${VARIANT}"
+alias setup="source setup-environment ${TARGET}"
 
 function repo_init {
   #
@@ -20,15 +20,15 @@ function repo_init {
 function repo_sync {
   repo sync
   #
-  #  At the time this is written, there is a mistake in a configuration file.
-  sed -i '/CONNECTIVITY_CHECK_URIS/cCONNECTIVITY_CHECK_URIS=""' conf/local.conf
+  #  Remove this warning by replacing the entire line with the word 'true'.
+  sed -i '/ERROR: do not use the BSP as root/ctrue' setup-environment
 }
 
 function bake_bits {
   for i in $(find .. -name '*sanity.bbclass'); do
     sed -i '/Do not use Bitbake as root/s/raise_sanity_error/pass # /' ${i}
   done
-  bitbake ${VARIANT}
+  bitbake ${TARGET}
 }
 
 function usage {
@@ -38,7 +38,7 @@ function usage {
   echo "  setup"
   echo "  bake_bits"
   echo
-  echo "The setup script changes your directory to ${VARIANT}"
+  echo "The setup script changes your directory to ${TARGET}"
 }
 
 usage
